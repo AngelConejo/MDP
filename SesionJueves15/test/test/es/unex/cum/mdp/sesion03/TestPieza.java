@@ -1,5 +1,5 @@
-package es.unex.cum.mdp.sesion03;
-//hola
+package test.es.unex.cum.mdp.sesion03;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
@@ -7,6 +7,8 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import src.es.unex.cum.mdp.sesion03.Pieza;
 
 public class TestPieza {
 

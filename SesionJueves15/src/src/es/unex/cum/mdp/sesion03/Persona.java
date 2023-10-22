@@ -1,4 +1,6 @@
-package es.unex.cum.mdp.sesion03;
+package src.es.unex.cum.mdp.sesion03;
+
+import java.util.Objects;
 
 public class Persona {
 	private String nombre;
@@ -45,6 +47,11 @@ public class Persona {
 	}
 	
 	@Override
+	public int hashCode() {
+		return Objects.hash(dni, edad, nombre);
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -53,19 +60,7 @@ public class Persona {
 		if (getClass() != obj.getClass())
 			return false;
 		Persona other = (Persona) obj;
-		if (dni == null) {
-			if (other.dni != null)
-				return false;
-		} else if (!dni.equals(other.dni))
-			return false;
-		if (edad != other.edad)
-			return false;
-		if (nombre == null) {
-			if (other.nombre != null)
-				return false;
-		} else if (!nombre.equals(other.nombre))
-			return false;
-		return true;
+		return Objects.equals(dni, other.dni) && edad == other.edad && Objects.equals(nombre, other.nombre);
 	}
 	
 	

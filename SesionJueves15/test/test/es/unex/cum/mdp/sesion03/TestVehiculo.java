@@ -1,26 +1,31 @@
-package es.unex.cum.mdp.sesion03;
+package test.es.unex.cum.mdp.sesion03;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import src.es.unex.cum.mdp.sesion03.Persona;
+import src.es.unex.cum.mdp.sesion03.Pieza;
+import src.es.unex.cum.mdp.sesion03.Vehiculo;
+
 public class TestVehiculo {
 	// Tamaño de piezas de vehiculo 5
-	private Vehiculo v1, v2, v3;
+	private Vehiculo v1, v2, v3,v_v4;
 	private Persona p;
 
 	@Before
 	public void setUp() throws Exception {
-		v1 = new Vehiculo();
+		v1 = new Vehiculo(3);
 		p = new Persona("Luis", "4", 4);
-		v2 = new Vehiculo("Renault", "Laguna", p);
+		v2 = new Vehiculo("Renault", "Laguna", p,3);
 		v3 = new Vehiculo(v2);
+		v_v4 = new Vehiculo(5);
 	}
 
 	@After
@@ -82,18 +87,25 @@ public class TestVehiculo {
 		Pieza p2 = new Pieza("2", "Faro", 5);
 		Pieza p3 = new Pieza("3", "Cambio", 1);
 		Pieza p4 = new Pieza("4", "Bujia", 1);
-		Pieza p5 = new Pieza("4", "Bujia", 1);
-		Pieza p6 = new Pieza("3", "Cambio", 1);
-		Pieza p7 = new Pieza("7", "Cambio", 1);
-		Pieza p8 = new Pieza("8", "Cambio", 1);
+		Pieza p5 = new Pieza("1", "Freno", 2);
+		Pieza p7 = new Pieza("5", "Otra", 1);
+		Pieza p8 = new Pieza("6", "Otra", 1); //se pasa de tamaño
+		Pieza p9 = new Pieza("9", "Otra", 1); //se pasa de tamaño
+		Pieza p10 = new Pieza("10", "Otra", 1); //se pasa de tamaño
 		assertTrue(v2.addPiezaV(p1));
+		assertFalse(v2.addPiezaV(p5)); 	//La pieza ya existe con ese id 1
 		assertTrue(v2.addPiezaV(p2));
 		assertTrue(v2.addPiezaV(p3));
-		assertTrue(v2.addPiezaV(p4));
-		assertFalse(v2.addPiezaV(p5));
-		assertFalse(v2.addPiezaV(p6));
-		assertTrue(v2.addPiezaV(p7));
-		assertFalse(v2.addPiezaV(p8));
+		assertFalse(v2.addPiezaV(p4)); //La pieza no coge
+		
+		
+		assertTrue(v_v4.addPiezaV(p1));
+		assertTrue(v_v4.addPiezaV(p4));
+		assertFalse(v_v4.addPiezaV(p5));
+		assertTrue(v_v4.addPiezaV(p7));
+		assertTrue(v_v4.addPiezaV(p8));
+		assertTrue(v_v4.addPiezaV(p9));
+		assertFalse(v_v4.addPiezaV(p10));
 
 	}
 
@@ -102,6 +114,7 @@ public class TestVehiculo {
 		Pieza p1 = new Pieza("1", "Freno", 2);
 		Pieza p2 = new Pieza("2", "Faro", 5);
 		Pieza p3 = new Pieza("3", "Cambio", 1);
+		
 		v2.addPiezaV(p1);
 		v2.addPiezaV(p2);
 		v2.addPiezaV(p3);

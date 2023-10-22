@@ -1,4 +1,4 @@
-package src.es.unex.cum.mdp.sesion03;
+package es.unex.cum.mdp.sesion03;
 
 
 import java.util.Objects;
@@ -131,6 +131,9 @@ public class Vehiculo {
 	public Pieza[] getPiezasV() {
 		return Piezas;
 	}
+	public Pieza getPiezas(int i) {
+		return Piezas[i];
+	}
 	public Pieza getPiezasV(int i) {
 		return Piezas[i];
 	}
@@ -140,7 +143,7 @@ public class Vehiculo {
 	public boolean addPiezaV(Pieza p) {
 		Pieza pt=new Pieza();
 		for (int i=0;i<Piezas.length;i++) {
-			if (Piezas[i].equals(p))
+			if (Piezas[i].getId().equals(p.getId()))
 			{
 				return false;
 			}
@@ -179,7 +182,7 @@ public class Vehiculo {
 		}
 		
 	}
-	public boolean setPiezaV(Pieza p, int x){
+	public boolean setPieza(Pieza p, int x){
 		
 		if(x<0 || x>Piezas.length)
 		{

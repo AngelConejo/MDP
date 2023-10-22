@@ -1,4 +1,4 @@
-package src.es.unex.cum.mdp.sesion03;
+package es.unex.cum.mdp.sesion03;
 
 import java.util.Objects;
 

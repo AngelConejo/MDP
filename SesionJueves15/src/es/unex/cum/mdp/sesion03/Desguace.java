@@ -1,4 +1,4 @@
-package src.es.unex.cum.mdp.sesion03;
+package es.unex.cum.mdp.sesion03;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -72,7 +72,9 @@ public class Desguace {
             if (it.next().equals(v)) {
                 return false;
             }
+            
         }
+        vehiculos.add(v);
         return true;
 
     }
@@ -86,7 +88,7 @@ public class Desguace {
             }
         }
 
-        return new Vehiculo();
+        return null;
 
     }
 
@@ -99,21 +101,24 @@ public class Desguace {
 
             if (aux.getBastidor().equals(bastidor)) {
 
-                for (int i = 0; i < aux.getArrayPiezasV().length; i++) {
+                for (int i = 0; i < aux.getPiezas().length; i++) {
 
-                    if (aux.getArrayPiezasV()[i].equals(p)) {
-
-                        return false; 
+                    if (aux.getPiezas(i).getId().equals(p.getId())) {
+                        
+                        Pieza pieza = aux.getPiezas(i);
+                        pieza.setStock(pieza.getStock()+1);
+                        aux.setPieza(pieza, i);
+                        return true; 
 
                     }
-                   
+    
                 }
 
-                aux.addPiezaV(p);
-                return true; 
+               
+                return  aux.addPiezaV(p); 
 
             }
-
+            
         }
 
         return false;
@@ -128,11 +133,11 @@ public class Desguace {
 
             if (aux.getBastidor().equals(bastidor)) {
 
-                for (int i = 0; i < aux.getArrayPiezasV().length; i++) {
+                for (int i = 0; i < aux.getPiezas().length; i++) {
 
-                    if (aux.getArrayPiezasV()[i].getId().equals(id)) {
+                    if (aux.getPiezasV()[i].getId().equals(id)) {
                        
-                        return aux.getArrayPiezasV()[i];
+                        return aux.getPiezas()[i];
 
                     }
                 

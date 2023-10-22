@@ -10,9 +10,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import src.es.unex.cum.mdp.sesion03.Persona;
-import src.es.unex.cum.mdp.sesion03.Pieza;
-import src.es.unex.cum.mdp.sesion03.Vehiculo;
+import es.unex.cum.mdp.sesion03.Persona;
+import es.unex.cum.mdp.sesion03.Pieza;
+import es.unex.cum.mdp.sesion03.Vehiculo;
 
 public class TestVehiculo {
 	// Tamaño de piezas de vehiculo 5

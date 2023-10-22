@@ -1,4 +1,4 @@
-package src.es.unex.cum.mdp.sesion03;
+package es.unex.cum.mdp.sesion05;
 
 import java.util.Objects;
 
@@ -7,8 +7,8 @@ public class Pieza {
 	int stock;
 	public Pieza()
 	{
-		this.id =null;
-		this.nombre = null;
+		this.id ="";
+		this.nombre = "";
 		this.stock = 0;
 	}
 	public Pieza(Pieza p) {

@@ -8,7 +8,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import src.es.unex.cum.mdp.sesion03.Pieza;
+import es.unex.cum.mdp.sesion03.Pieza;
 
 public class TestPieza {
 

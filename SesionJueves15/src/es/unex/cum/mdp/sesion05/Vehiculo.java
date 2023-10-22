@@ -140,22 +140,28 @@ public class Vehiculo {
 		this.Piezas = Piezas;
 	}
 	public boolean addPiezaV(Pieza p) {
-		Pieza pt=new Pieza();
-		for (int i=0;i<Piezas.length;i++) {
-			if (Piezas[i].getId().equals(p.getId()))
-			{
-				return false;
-			}
-			else if(Piezas[i].equals(pt)) {
-				Piezas[i]=p;
-				return true;
-			}
-		}
-		
-		return false;
+	    for (int i = 0; i < Piezas.length; i++) {
+	        if (Piezas[i] != null && Piezas[i].getId().equals(p.getId())) {
+	            Piezas[i].setStock(Piezas[i].getStock() + 1);
+	            return true;
+	        }
+	    }
+
+	    // Si la pieza no está en el array, encontrar un espacio vacío o ampliar el array si es necesario
+	    for (int i = 0; i < Piezas.length; i++) {
+	        if (Piezas[i] == null) {
+	            Piezas[i] = p;
+	            return true;
+	        }
+	    }
+
+	    // Si el array está lleno, crear un nuevo array más grande
+	    Pieza[] nuevoArray = new Pieza[Piezas.length + 1];
+	    System.arraycopy(Piezas, 0, nuevoArray, 0, Piezas.length);
+	    nuevoArray[Piezas.length] = p;
+	    Piezas = nuevoArray;
+	    return true;
 	}
-	
-	
 	@Override
 	public int hashCode() {
 		return Objects.hash(bastidor);

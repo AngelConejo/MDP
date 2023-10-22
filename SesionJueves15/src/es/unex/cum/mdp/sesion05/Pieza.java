@@ -2,7 +2,7 @@ package es.unex.cum.mdp.sesion05;
 
 import java.util.Objects;
 
-public class Pieza {
+public class Pieza implements Comparable<Pieza> {
 	String id,nombre;
 	int stock;
 	public Pieza()
@@ -60,5 +60,8 @@ public class Pieza {
 		Pieza other = (Pieza) obj;
 		return Objects.equals(id, other.id) && Objects.equals(nombre, other.nombre) && stock == other.stock;
 	}
-	
-}
+	 public int compareTo(Pieza otraPieza) {
+	        return this.getId().compareTo(otraPieza.getId());
+	    }
+	}
+

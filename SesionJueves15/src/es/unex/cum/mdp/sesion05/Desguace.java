@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Objects;
 import java.util.TreeSet;
 
@@ -127,30 +128,26 @@ public class Desguace {
 	}
 
 	public boolean addPiezaVehiculo(Pieza p, Integer bastidor) {
-
-
+        if(p==null || bastidor==null) return false;
+		
 		Iterator<Vehiculo> it = vehiculos.iterator();
-		while (it.hasNext()) {
-			Vehiculo aux = it.next();
+        while (it.hasNext()) {
+            Vehiculo aux = it.next();
+            if (aux.getBastidor().equals(bastidor)) {
+                for (int i = 0; i < aux.getPiezas().length; i++) {
+                    if (aux.getPiezas(i).getId().equals(p.getId())) {
+                        Pieza pieza = aux.getPiezas(i);
+                        pieza.setStock(pieza.getStock() + 1);
+                        aux.setPieza(pieza, i);
+                        return true;
+                    }
+                }
+                return aux.addPiezaV(p);
+            }
+        }
+        return false;
+    }
 
-			if (aux.getBastidor().equals(bastidor)) {
-
-				for (int i = 0; i < aux.getPiezas().length; i++) {
-
-					if (aux.getPiezas(i).getId().equals(p.getId())) {
-
-						Pieza pieza = aux.getPiezas(i);
-						pieza.setStock(pieza.getStock()+1);
-						aux.setPieza(pieza, i);
-						return true; 
-
-					}
-				}
-				return  aux.addPiezaV(p); 
-			}
-		}
-		return false;
-	}
 
 	Pieza getPiezaVehiculo(String id, Integer bastidor) {
 
@@ -178,21 +175,23 @@ public class Desguace {
 	}
 
 
-	public boolean addPiezaVehiculo(String id, Integer bastidor)
-	{
-		Iterator<Pieza> it= piezas.iterator();
-		while(it.hasNext()) {
-			Pieza aux= it.next();
-			if (aux.getId().equals(id))
-			{
-				if(getVehiculoBastidor(bastidor).addPiezaV(aux))
-				{
-					return true;
-				}
+	public boolean addPiezaVehiculo(String id, Integer bastidor) {
+	   
+	    if (id == null || bastidor == null) return false;
 
-			}
-		}
-		return false;
+	    Iterator<Pieza> it = piezas.iterator();
+	    while(it.hasNext()) {
+	        Pieza aux = it.next();
+	        if (aux.getId().equals(id)) {
+	            Vehiculo vehiculo = getVehiculoBastidor(bastidor);
+	            
+	            
+	            if (vehiculo != null && vehiculo.addPiezaV(aux)) {
+	                return true;
+	            }
+	        }
+	    }
+	    return false;
 	}
 	public boolean addPiezaAlmacen(Pieza p)
 	{
@@ -240,54 +239,66 @@ public class Desguace {
 		}
 		return suma/empleados.size();
 	}
-	public Vehiculo mayorStock()
-	{
-		
-	if (vehiculos.isEmpty())
-	{
-		return null;
-	}
-	Collections.sort(vehiculos, new Comparator<Vehiculo>()
-	{
-		public int compare(Vehiculo v1, Vehiculo v2)
-		{
-			int stockv1=0;
-			Pieza[] piezasv1=v1.getPiezas();
-			for(int i=0;i<piezasv1.length;i++)
-			{
-				stockv1+=piezasv1[i].getStock();
-			}
-			int stockv2=0;
-			Pieza[] piezasv2=v2.getPiezas();
-			for(int i=0;i<piezasv2.length;i++)
-			{
-				stockv2+=piezasv2[i].getStock();
-			}
-			return Integer.compare(stockv1, stockv2);
-			
-		}
-		
-		
-	});
-	return vehiculos.get(0);
-	
+	public Vehiculo mayorStock() {
+	    if (vehiculos.isEmpty()) {
+	        return null;
+	    }
+
+	    Collections.sort(vehiculos, new Comparator<Vehiculo>() {
+	        public int compare(Vehiculo v1, Vehiculo v2) {
+	            int stockv1 = 0;
+	            Pieza[] piezasv1 = v1.getPiezas();
+	            for (int i = 0; i < piezasv1.length; i++) {
+	                stockv1 += piezasv1[i].getStock();
+	            }
+	            
+	            int stockv2 = 0;
+	            Pieza[] piezasv2 = v2.getPiezas();
+	            for (int i = 0; i < piezasv2.length; i++) {
+	                stockv2 += piezasv2[i].getStock();
+	            }
+	            
+	            return Integer.compare(stockv2, stockv1);  // Notar que hemos invertido v2 y v1 aquí
+	        }
+	    });
+
+	    return vehiculos.get(0);  // Ahora, el vehículo con el mayor stock estará al principio de la lista.
 	}
 	public class ComparatorVehiculoPieza implements Comparator<Vehiculo> {
 	    public int compare(Vehiculo v1, Vehiculo v2) {
 	        return Integer.compare(v2.getPiezas().length, v1.getPiezas().length); 
 	    }
 	}
-	public Vehiculo mayorPieza()
-	{
-		if (vehiculos.isEmpty())
-		{
-			return null;
-		}
-		Collections.sort(vehiculos, new ComparatorVehiculoPieza());
-		
-		return vehiculos.get(0);
+	public Vehiculo mayorPieza() {
+	    Vehiculo vehiculoConMasTipos = null;
+	    int maxTipos = 0;
+
+	    for (Vehiculo vehiculo : vehiculos) {
+	        Pieza[] piezasDelVehiculo = vehiculo.getPiezas();
+	        
+	        // Usamos una lista para almacenar los IDs únicos de las piezas.
+	        List<String> idsUnicos = new ArrayList<>();
+
+	        for (Pieza pieza : piezasDelVehiculo) {
+	            if (!idsUnicos.contains(pieza.getId())) {
+	                idsUnicos.add(pieza.getId());
+	            }
+	        }
+
+	        if (idsUnicos.size() > maxTipos) {
+	            maxTipos = idsUnicos.size();
+	            vehiculoConMasTipos = vehiculo;
+	        }
+	    }
+
+	    return vehiculoConMasTipos;
 	}
-	
+	public class PiezaComparator implements Comparator<Pieza> {
+        @Override
+        public int compare(Pieza p1, Pieza p2) {
+            return p1.getId().compareTo(p2.getId());
+        }
+    }
 	
 	
 	

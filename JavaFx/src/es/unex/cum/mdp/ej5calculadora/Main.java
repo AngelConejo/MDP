@@ -16,7 +16,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource("vista/Calculadora.fxml")); // Ponemos el
+            BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource("vista/ej5Calculadora.fxml")); // Ponemos el
                                                                                                         // fichero fxml
                                                                                                         // creado
             Scene scene = new Scene(root);

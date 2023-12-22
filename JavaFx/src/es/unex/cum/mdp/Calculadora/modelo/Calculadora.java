@@ -19,33 +19,35 @@ public class Calculadora {
 	}
 
 	public float getPrimerOperando() {
-		return 0.0F;
+		return primerOperando;
 	}
 
 	public void setPrimerOperando(float primerOperando) {
+	this.primerOperando=primerOperando;
 	}
 
 	public float getSegundoOperando() {
-		return 0.0F;
+		return segundoOperando;
 	}
 
 	public void setSegundoOperando(float segundoOperando) {
+	this.segundoOperando=segundoOperando;
 	}
 	
 	public float sumar(float num1, float num2) {
-		return 0.0F;
+		return num1+num2;
 	}
 
 	public float restar(float num1, float num2) {
-		return 0.0F;
+		return num1-num2;
 	}
 
 	public float multiplicar(float num1, float num2) {
-		return 0.0F;
+		return num1*num2;
 	}
 
 	public float dividir(float num1, float num2) {
-		return 0.0F;
+		return num1/num2;
 	}
 	
 	private float round(float d, int decimalPlace) {

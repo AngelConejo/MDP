@@ -173,16 +173,16 @@ public class CalculadoraController {
 	switch(llave)
 	{
 	case"BDivision":
-		text1.setText(String.valueOf(bipop.sumar(cofre, Float.parseFloat(text1.getText()))));
+		text1.setText(String.valueOf(bipop.dividir(cofre, Float.parseFloat(text1.getText()))));
 		break;
 	case "BMultiplicacion":
-		text1.setText(String.valueOf(bipop.sumar(cofre, Float.parseFloat(text1.getText()))));
+		text1.setText(String.valueOf(bipop.multiplicar(cofre, Float.parseFloat(text1.getText()))));
 		break;
 	case "BSuma":
 		text1.setText(String.valueOf(bipop.sumar(cofre, Float.parseFloat(text1.getText()))));
 		break;
 	case "BResta":
-		text1.setText(String.valueOf(bipop.sumar(cofre, Float.parseFloat(text1.getText()))));
+		text1.setText(String.valueOf(bipop.restar(cofre, Float.parseFloat(text1.getText()))));
 		break;
 	}
 

@@ -9,6 +9,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.TreeSet;
 
+import es.unex.cum.mdp.sesion05.Empleado;
+import es.unex.cum.mdp.sesion05.Pieza;
+import es.unex.cum.mdp.sesion05.Vehiculo;
+
 public class Desguace {
 
 	private String nombre;
@@ -126,19 +130,7 @@ public class Desguace {
 		return null;
 
 	}
-	public Pieza getPiezaDesguace(String id) {
-		Iterator<Pieza> it = piezas.iterator();
-		while (it.hasNext()) {
-		Pieza pieza = (Pieza) it.next();
-		if (pieza.getId().equals(id)) {
-		return pieza;
-		}
-		}
-		return null;
-		}
-		public boolean addPiezaDesguace(Pieza p) {
-		 return piezas.add(p);
-		}
+
 	public boolean addPiezaVehiculo(Pieza p, Integer bastidor) {
         if(p==null || bastidor==null) return false;
 		
@@ -159,12 +151,29 @@ public class Desguace {
         }
         return false;
     }
-	
+
 
 	Pieza getPiezaVehiculo(String id, Integer bastidor) {
 
 		Iterator<Vehiculo> it = vehiculos.iterator();
-		while (it.hasNext()) {}
+		while (it.hasNext()) {
+			Vehiculo aux = it.next();
+
+			if (aux.getBastidor().equals(bastidor)) {
+
+				for (int i = 0; i < aux.getPiezas().length; i++) {
+
+					if (aux.getPiezasV()[i].getId().equals(id)) {
+
+						return aux.getPiezas()[i];
+
+					}
+
+				}
+			}
+
+
+		}
 		return null;
 
 	}
@@ -294,10 +303,6 @@ public class Desguace {
             return p1.getId().compareTo(p2.getId());
         }
     }
-	public Object getAlmacen() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 	
 	

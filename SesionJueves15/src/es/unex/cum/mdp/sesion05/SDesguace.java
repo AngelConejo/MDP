@@ -9,43 +9,48 @@ import java.util.List;
 import java.util.Objects;
 import java.util.TreeSet;
 
-public class Desguace {
+public class SDesguace {
 
 	private String nombre;
 	private ArrayList<Vehiculo> vehiculos;
 	private TreeSet<Pieza> piezas;
 	private HashMap<String,Empleado> empleados;
-
-	public Desguace(String nombre, int numero)
-	{
+	private static SDesguace sg=null;
+	public static SDesguace getInstance(){
+		if(sg==null) sg=new SDesguace();
+		return sg;
+	}
+	
+	public SDesguace(String nombre, int numero) {
+	
 		super();
 		this.nombre = nombre;
 		vehiculos=new ArrayList<Vehiculo>(numero);
 		piezas= new TreeSet<Pieza>();
 		empleados= new HashMap<String,Empleado>();
 	}
-	public Desguace() {
+	private SDesguace() {
 		nombre = "";
 		vehiculos = new ArrayList<Vehiculo>();
 		piezas = new TreeSet<Pieza>();
 		empleados= new HashMap<String,Empleado>();
 	}
 
-	public Desguace(String nombre, ArrayList<Vehiculo> vehiculos) {
+	private SDesguace(String nombre, ArrayList<Vehiculo> vehiculos) {
 		super();
 		this.nombre = nombre;
 		this.vehiculos = vehiculos;
 		piezas= new TreeSet<Pieza>();
 		empleados= new HashMap<String,Empleado>();
 	}
-	public Desguace(String nombre, ArrayList<Vehiculo> vehiculos,TreeSet<Pieza>piezas) {
+	private SDesguace(String nombre, ArrayList<Vehiculo> vehiculos,TreeSet<Pieza>piezas) {
 		super();
 		this.nombre = nombre;
 		this.vehiculos = vehiculos;
 		this.piezas= piezas;
 		empleados= new HashMap<String,Empleado>();
 	}
-	public Desguace(String nombre, TreeSet<Pieza>piezas) {
+	private SDesguace(String nombre, TreeSet<Pieza>piezas) {
 		super();
 		this.nombre = nombre;
 		vehiculos=new ArrayList<Vehiculo>();
@@ -53,14 +58,14 @@ public class Desguace {
 		empleados= new HashMap<String,Empleado>();
 	}
 
-	public Desguace(String nombre) {
+	private SDesguace(String nombre) {
 		super();
 		this.nombre = nombre;
 		this.vehiculos = new ArrayList<Vehiculo>();
 		piezas=new TreeSet<Pieza>();
 		empleados= new HashMap<String,Empleado>();
 	}
-
+	
 
 	public String getNombre() {
 		return nombre;
@@ -91,7 +96,7 @@ public class Desguace {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Desguace other = (Desguace) obj;
+		SDesguace other = (SDesguace) obj;
 		return Objects.equals(nombre, other.nombre) && Objects.equals(vehiculos, other.vehiculos);
 	}
 
@@ -126,19 +131,7 @@ public class Desguace {
 		return null;
 
 	}
-	public Pieza getPiezaDesguace(String id) {
-		Iterator<Pieza> it = piezas.iterator();
-		while (it.hasNext()) {
-		Pieza pieza = (Pieza) it.next();
-		if (pieza.getId().equals(id)) {
-		return pieza;
-		}
-		}
-		return null;
-		}
-		public boolean addPiezaDesguace(Pieza p) {
-		 return piezas.add(p);
-		}
+
 	public boolean addPiezaVehiculo(Pieza p, Integer bastidor) {
         if(p==null || bastidor==null) return false;
 		
@@ -159,12 +152,29 @@ public class Desguace {
         }
         return false;
     }
-	
+
 
 	Pieza getPiezaVehiculo(String id, Integer bastidor) {
 
 		Iterator<Vehiculo> it = vehiculos.iterator();
-		while (it.hasNext()) {}
+		while (it.hasNext()) {
+			Vehiculo aux = it.next();
+
+			if (aux.getBastidor().equals(bastidor)) {
+
+				for (int i = 0; i < aux.getPiezas().length; i++) {
+
+					if (aux.getPiezasV()[i].getId().equals(id)) {
+
+						return aux.getPiezas()[i];
+
+					}
+
+				}
+			}
+
+
+		}
 		return null;
 
 	}
@@ -294,10 +304,6 @@ public class Desguace {
             return p1.getId().compareTo(p2.getId());
         }
     }
-	public Object getAlmacen() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 	
 	

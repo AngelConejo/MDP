@@ -19,6 +19,9 @@ public class Coche extends Vehiculo{
         super(marca,modelo,propietario,bastidor,tam);
         this.color = color;
     }
+    public Coche (int tam) {
+        super(tam);
+    }
 
     public String getcolor() {
         return color;

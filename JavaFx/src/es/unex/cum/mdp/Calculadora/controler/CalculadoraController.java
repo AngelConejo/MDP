@@ -42,7 +42,7 @@ public class CalculadoraController {
 	private Button B9;
 
 	@FXML
-	private Button BBarra;
+	private Button BResta;
 
 	@FXML
 	private Button BCE;
